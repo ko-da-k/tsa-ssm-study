@@ -27,5 +27,10 @@ RUN install2.r -e rugarch
 RUN install2.r -e prophet
 #RUN install2.r --error --deps TRUE fGarch
 RUN Rscript -e "devtools::install_github('cran/fGarch')"
+
+# Install ipaexfont
+RUN apt-get update && apt-get install -y \
+  fonts-ipaexfont
+
 CMD ["/init"]
 WORKDIR /root/workspace
