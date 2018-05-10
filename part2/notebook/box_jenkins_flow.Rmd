@@ -1,0 +1,342 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+
+```{r}
+library(xts)
+library(forecast)
+library(urca)
+library(ggplot2)
+library(ggfortify)
+```
+
+## ts object
+
+```{r}
+ts_sample <- ts(1:36,start = c(2000,1),freq=12)
+ts_sample
+```
+
+```{r}
+ts_freq4 <- ts(1:8,start=c(2000,1),freq=4)
+ts_freq4
+```
+
+```{r}
+mat_with_name =matrix(1:8,
+                      ncol=4,
+                      dimnames = list(c("row1","row2"),c("col1","col2","col3","col4")))
+mat_with_name
+```
+
+```{r}
+ts(mat_with_name,start=c(2000,1),freq=12)
+```
+
+```{r}
+window(ts_freq4,start=c(2000,2),end=c(2001,1))
+```
+
+```{r}
+print(head(Seatbelts))
+print(tail(Seatbelts))
+print(class(Seatbelts))
+?Seatbelts
+```
+
+```{r}
+subset(Seatbelts[,"front"],month=3)
+```
+
+## xts object
+
+```{r}
+xts_sample <- as.xts(matrix(1:5,
+                     dimnames=list(c("2000-01-01","2000-01-02","2000-01-03","2000-01-04","2000-01-05"))),
+                     ncol=1)
+xts_sample
+```
+
+```{r}
+print(xts_sample['2000-01-02'])
+print(xts_sample["2000-01-02::"])
+print(xts_sample["2000-01-02::2000-01-04"])
+```
+
+## 実際にARIMAモデリング
+
+```{r}
+print(class(Seatbelts[,'front']))
+ggplot2::autoplot(Seatbelts[,"front"],
+                  main="イギリスの交通事故死傷者数（前席）",
+                  xlab="年",
+                  ylab="死傷者数")
+```
+
+
+```{r}
+ggplot2::autoplot(log(Seatbelts[,"front"]),
+                  main="イギリスの交通事故死傷者数（前席）",
+                  xlab="年",
+                  ylab="死傷者数")
+```
+
+## 単位根検定
+
+H: 単位根あり
+K: 単位根なし
+```{r}
+summary(ur.kpss(log(Seatbelts[,'front'])))
+```
+
+`ndiffs`は定常になるまでに必要な差分の回数を推定する．
+`alpha`で有意水準，`test`で検定の種類(kpss,adf,pp)を指定できる.
+
+```{r}
+forecast::ndiffs(log(Seatbelts[,'front']))
+```
+
+```{r}
+forecast::ndiffs(log(Seatbelts[,'front']),test='kpss')
+```
+
+## ARIMA modeling
+
+```{r}
+library(tseries)
+```
+front(前席での死傷者数)をモデリングする．
+データとしてはさらに
+- PetroPrice(ガソリンの値段)
+- law(前席のシートベルト装着義務法律が施行されているか)
+
+仮説：
+- シートベルト装着義務化(1983/1/31)で死亡者数は減った．
+- 交通事故は季節性がある
+
+```{r}
+front <- Seatbelts[,'front']
+log_front <- log(front)
+ggtsdisplay(log_front,main='対数系列')
+```
+```{r}
+log_diff <- diff(log_front,lag=1)
+ggtsdisplay(log_diff,main="対数差分系列")
+```
+
+1年おきの自己相関が大きい．月ごとにグラフを書いてみる．
+
+```{r}
+ggsubseriesplot(front) #原系列
+```
+
+12月の自己数がもっとも大きいことがわかる.
+季節差分をとれば，自己相関がなくなることが期待できる.
+
+```{r}
+seas_log_diff <- diff(log_diff,lag=frequency((log_diff)))
+ggtsdisplay(seas_log_diff,main='季節差分系列')
+```
+
+まだ，12ヶ月単位の自己相関は大きい.
+
+## 訓練データとテストデータに分ける
+
+```{r}
+Seatbelts_log <- Seatbelts[,c("front","PetrolPrice","law")]
+Seatbelts_log[,"front"] <- log(Seatbelts_log[,"front"])
+Seatbelts_log[,"PetrolPrice"] <- log(Seatbelts_log[,"PetrolPrice"])
+```
+
+```{r}
+train <- window(Seatbelts_log,end=c(1983,12))
+test <- window(Seatbelts_log,start=c(1984,1))
+```
+
+```{r}
+petro_law <- train[,c("PetrolPrice","law")]
+```
+
+
+## ARIMAモデルの推定
+
+```{r}
+model_sarimax <- Arima(
+  y = train[,"front"],
+  order = c(1,1,1),
+  seasonal = list(order=c(1,0,0)),
+  xreg = petro_law
+)
+```
+
+```{r}
+model_sarimax
+```
+
+```{r}
+Arima(
+  y=log_diff,order=c(1,0,0),
+  include.mean = F
+)
+```
+
+上は以下と同じ
+```{r}
+Arima(
+  y=log_front,order=c(1,1,0),include.mean = F
+)
+```
+
+```{r}
+Arima(
+  y=seas_log_diff,
+  order=c(1,0,0),
+  include.mean = F
+)
+```
+
+```{r}
+Arima(
+  y=log_diff,order=c(1,0,0),
+  seasonal = list(order=c(0,1,0))
+)
+```
+
+
+## auto.arima
+
+```{r}
+sarimax_petro_law <- auto.arima(
+  y=train[,"front"],
+  xreg = petro_law,
+  ic = "aic",
+  max.order = 7,
+  stepwise = F,
+  approximation = F,
+  parallel = T,
+  num.cores = 4
+)
+```
+
+```{r}
+sarimax_petro_law
+```
+
+## 定常性のチェック
+
+```{r}
+abs(polyroot(c(1,-coef(sarimax_petro_law)[c("ar1","ar2")])))
+```
+
+### MA term
+```{r}
+abs(polyroot(c(1,-coef(sarimax_petro_law)[c("ma1")])))
+```
+
+### SAR term
+```{r}
+abs(polyroot(c(1,-coef(sarimax_petro_law)[c("sma1")])))
+```
+
+
+check residual
+
+```{r}
+checkresiduals(sarimax_petro_law)
+```
+
+
+Normality of residuals
+
+help says
+> This test is a joint statistic using skewness and kurtosis coefficients.
+Missing values are not allowed.
+
+先度と歪度でチェックしている
+
+```{r}
+tseries::jarque.bera.test(resid(sarimax_petro_law))
+```
+
+## prediction
+
+```{r}
+petro_law_test <- test[,c("PetrolPrice","law")]
+```
+
+```{r}
+sarimax_f <- forecast(
+  sarimax_petro_law, # model
+  xreg = petro_law_test, # test data
+  h = 12, # predict 12 periods
+  level=c(95,70), #output 95% and 70% prediction interval
+)
+```
+
+
+```{r}
+sarimax_f
+```
+
+```{r}
+autoplot(sarimax_f,predict.colour = 1)
+```
+
+```{r}
+petro_law_mean <- data.frame(
+  PetrolPrice=rep(mean(train[,"PetrolPrice"]),12),
+  law=rep(1,12)
+)
+petro_law_mean
+```
+
+```{r}
+petro_law_tail <- data.frame(
+  PetrolPrice=rep(tail(train[,"PetrolPrice"],n=1),12),
+  law=rep(1,12)
+)
+petro_law_tail
+```
+
+```{r}
+sarimax_f_mean <- forecast(sarimax_petro_law,xreg=petro_law_mean)
+sarimax_f_tail <- forecast(sarimax_petro_law,xreg=petro_law_tail)
+```
+
+```{r}
+autoplot(sarimax_f_mean)
+```
+
+```{r}
+autoplot(sarimax_f_tail)
+```
+
+### benchmark
+
+```{r}
+naive_f_mean <- forecast::meanf(train[,'front'],h=12)
+naive_f_mean
+```
+
+```{r}
+naive_f_latest <- forecast::rwf(train[,"front"],h=12)
+naive_f_latest
+```
+
+## evaluation
+```{r}
+forecast::accuracy(sarimax_f,x=test[,"front"])
+```
+
+```{r}
+forecast::accuracy(sarimax_f_mean,x=test[,"front"])
+```
+
+```{r}
+forecast::accuracy(sarimax_f_tail,x=test[,"front"])
+```
