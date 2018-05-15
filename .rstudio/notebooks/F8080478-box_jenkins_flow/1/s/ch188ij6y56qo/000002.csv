@@ -1,0 +1,7 @@
+"0","```r
+forecast::accuracy(sarimax_f_mean,x=test[,\"front\"])
+```"
+"1","                       ME       RMSE        MAE         MPE      MAPE      MASE       ACF1 Theil's U
+Training set -0.004353509 0.08283297 0.06430968 -0.07784816 0.9593004 0.5848660 -0.0040321        NA
+Test set      0.025426857 0.06945114 0.05363524  0.38363229 0.8362867 0.4877871  0.3205392 0.7478235
+"

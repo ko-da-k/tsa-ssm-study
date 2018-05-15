@@ -1,0 +1,4 @@
+"0","```r
+sarimax_f_mean <- forecast(sarimax_petro_law,xreg=petro_law_mean)
+sarimax_f_tail <- forecast(sarimax_petro_law,xreg=petro_law_tail)
+```"

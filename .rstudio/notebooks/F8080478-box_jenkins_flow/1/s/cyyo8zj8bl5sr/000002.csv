@@ -1,0 +1,7 @@
+"0","```r
+window(ts_freq4,start=c(2000,2),end=c(2001,1))
+```"
+"1","     Qtr1 Qtr2 Qtr3 Qtr4
+2000         2    3    4
+2001    5               
+"

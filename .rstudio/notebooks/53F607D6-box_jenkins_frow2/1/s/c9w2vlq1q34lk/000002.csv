@@ -1,0 +1,4 @@
+"0","```r
+daily_data$cnt_ma <- forecast::ma(daily_data$clean_cnt,order=7)
+daily_data$cnt_ma30 <- forecast::ma(daily_data$clean_cnt,order=30)
+```"

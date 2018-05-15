@@ -1,0 +1,5 @@
+"0","df_ar <- tibble(x_ar =x_ar,y_wn=y_ar)"
+"0","p_ar <- ggplot(df_wn,aes(x=x_ar,y=y_ar))+"
+"0","  geom_point()+"
+"0","  geom_smooth(method='lm',color=1)"
+"0","p_ar"

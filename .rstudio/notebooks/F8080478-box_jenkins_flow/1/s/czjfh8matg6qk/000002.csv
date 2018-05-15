@@ -1,0 +1,4 @@
+"0","```r
+log_front <- log(front)
+ggtsdisplay(log_front,main='対数系列')
+```"

@@ -1,0 +1,367 @@
+setwd('part2')
+library(tidyverse)
+read_csv('input/5-2-1-timeSeries.csv')
+dat <- read_csv('input/5-2-1-timeSeries.csv')
+dat
+ggplot(dat,aes(x=time,y=data))+
+geom_line()
+ggplot(dat,aes(x=time,y=data))+
+geom_point()
+source('~/.active-rstudio-document', echo=TRUE)
+library(tidyverse)
+setwd('part2')
+dat
+ggplot(dat,aes(x=time,y=data))+
+geom_point()
+library(xts)
+library(forecast)
+library(urca)
+library(ggplot2)
+library(ggfortify)
+ggplot2::autoplot(Seatbelts[,"front"],
+main="イギリスの交通事故死傷者数（前席）",
+xlab="年",
+ylab="死傷者数")
+ggplot(file_data,aes(x=time,y=data))+
+geom_line()+theme_gray(base_family = "HiraKakuPro-W3")
+file_data <- read_csv("input/5-2-1-timeSeries.csv")
+file_data
+ggplot(file_data,aes(x=time,y=data))+
+geom_line()+theme_gray(base_family = "HiraKakuPro-W3")
+ts_sample <- ts(1:36,start = c(2000,1),freq=12)
+ts_sample
+ts_freq4 <- ts(1:8,start=c(2000,1),freq=4)
+ts_freq4
+mat_with_name =matrix(1:8,
+ncol=4,
+dimnames = list(c("row1","row2"),c("col1","col2","col3","col4")))
+mat_with_name
+ts(mat_with_name,start=c(2000,1),freq=12)
+window(ts_freq4,start=c(2000,2),end=c(2001,1))
+print(head(Seatbelts))
+print(tail(Seatbelts))
+print(class(Seatbelts))
+?Seatbelts
+subset(Seatbelts[,"front"],month=3)
+xts_sample <- as.xts(matrix(1:5,
+dimnames=list(c("2000-01-01","2000-01-02","2000-01-03","2000-01-04","2000-01-05"))),
+ncol=1)
+xts_sample
+print(xts_sample['2000-01-02'])
+print(xts_sample["2000-01-02::"])
+print(xts_sample["2000-01-02::2000-01-04"])
+Seatbelts[,'front']
+class(Seatbelts[,'front'])
+print(class(Seatbelts[,'front']))
+ggplot2::autoplot(Seatbelts[,"front"],
+main="イギリスの交通事故死傷者数（前席）",
+xlab="年",
+ylab="死傷者数")
+ggplot2::autoplot(log(Seatbelts[,"front"]),
+main="イギリスの交通事故死傷者数（前席）",
+xlab="年",
+ylab="死傷者数")
+summary(ur.kpss(log(Seatbelts[,'front'])))
+ndiffs(log(Seatbelts[,'front']))
+?ndiffs
+summary(forecast::ndiffs(log(Seatbelts[,'front'])))
+forecast::ndiffs(log(Seatbelts[,'front']),test='pp')
+forecast::ndiffs(log(Seatbelts[,'front']),test='adf')
+forecast::ndiffs(log(Seatbelts[,'front']),test='kpss')
+library(tseries)
+front <- Seatbelts[,'front']
+front <- Seatbelts[,'front']
+front
+dat <- Seatbelts %>% select(front,PetroPrice,law)
+dat <- as_tibble(Seatbelts) %>% select(front,PetroPrice,law)
+dat <- as_tibble(Seatbelts) %>% select(front,PetrolPrice,law)
+dat
+dat <- as_tibble(date=index(Seatbelts),Seatbelts) %>% select(front,PetrolPrice,law)
+dat
+dat <- as_tibble(date=index(Seatbelts),Seatbelts) %>% select(date,front,PetrolPrice,law)
+as_tibble(date=index(Seatbelts),Seatbelts)
+tibble(date=index(Seatbelts),Seatbelts)
+tibble(date=index(Seatbelts))
+head(Seatbelts)
+index(Seatbelts)
+log_front <- log(front)
+ggtsdisplay(log_front,main='対数系列')
+log_diff <- diff(log_front,lag=1)
+ggtsdisplay(log_diff,main="対数差分系列")
+ggsubseriesplot(front) #原系列
+seas_log_diff <- diff(log_diff,lag=frequency((log_diff)))
+ggtsdisplay(seas_log_diff,main='季節差分系列')
+Seatbelts_log <- Seatbelts[,c("front","PetroPrice","law")]
+Seatbelts_log <- Seatbelts[,c("front","PetrolPrice","law")]
+Seatbelts_log["front"] <- log(Seatbelts_log[,"front"])
+Seatbelts_log <- Seatbelts[,c("front","PetrolPrice","law")]
+Seatbelts_log["front"] <- log(Seatbelts[,"front"])
+Seatbelts_log <- Seatbelts[,c("front","PetrolPrice","law")]
+Seatbelts_log[,"front"] <- log(Seatbelts_log[,"front"])
+Seatbelts_log[,"PetrolPrice"] <- log(Seatbelts_log[,"PetrolPrice"])
+train <- window(Seatbelts_log,end=c(1983,12))
+test <- window(Seatbelts_log,start=c(1984,1))
+petro_law <- train[,c("PetrolPrice","law")]
+model_sarimax <- Arima(
+y = train[,"front"],
+order=c(1,1,1),
+seasonal=list(order=c(1,0,0)),
+xreg = petro_law
+)
+model_sarimax <- Arima(
+y = train[,"front"],
+order=c(1,1,1),
+seasonal=list(order=c(1,0,0)),
+xreg = petro_law
+)
+model_sarimax
+Arima(
+y=log_diff,order=c(1,0,0),
+include.mean = F
+)
+Arima(
+y=log_front,oder=c(1,1,0),include.mean = F
+)
+Arima(
+y=log_front,order=c(1,1,0),include.mean = F
+)
+Arima(
+y=seas_log_diff,
+order=c(1,0,0),
+include.mean = F
+)
+Arima(
+y=log_front,order=c(1,1,0),
+seasonal = list(order=c(0,1,0))
+)
+Arima(
+y=log_diff,order=c(1,0,0),
+seasonal = list(order=c(0,1,0))
+)
+sarimax_petro_law <- auto.arima(
+y=train[,"front"],
+xreg = petro_law,
+ic = "aic",
+max.order = 7,
+stepwise = T,
+approximation = F,
+parallel = T,
+num.cores = 4
+)
+sarimax_petro_law <- auto.arima(
+y=train[,"front"],
+xreg = petro_law,
+ic = "aic",
+max.order = 7,
+stepwise = F,
+approximation = F,
+parallel = T,
+num.cores = 4
+)
+sarimax_petro_law
+polyroot(c(1,-coef(sarimax_petro_law)[c("ar1","ar2")]))
+abs(polyroot(c(1,-coef(sarimax_petro_law)[c("ar1","ar2")])))
+abs(polyroot(c(1,-coef(sarimax_petro_law)[c("ma1","ma2","ma3")])))
+abs(polyroot(c(1,-coef(sarimax_petro_law)[c("ma1")])))
+abs(polyroot(c(1,-coef(sarimax_petro_law)[c("sma1")])))
+checkresiduals(sarimax_petro_law)
+checkresiduals(sarimax_petro_law)
+tseries::jarque.bera.test(resid(sarimax_petro_law))
+?jarque.bera.test
+head(test)
+petro_law_test <- test[,c("PetrolPrice","law")]
+sarimax_f <- forecast(
+sarimax_petro_law, # model
+xreg = petro_law_test, # test data
+h = 12, # predict 12 periods
+level=c(95,70), #output 95% and 70% prediction interval
+)
+sarimax_f
+autoplot(sarimax_f,predict.colour = 1)
+autoplot(sarimax_f,predict.colour = 1)
+petro_law_mean <- data.frame(
+PetrolPrice=rep(mean(train[,"PetrolPrice"]),12),
+law=rep(1,12)
+)
+petro_law_mean
+petro_law_tail <- data.frame(
+PetrolPrice=rep(tail(train[,"PetrolPrice"],n=1),12),
+law=rep(1,12)
+)
+petro_law_tail
+sarimax_f_mean <- forecast(sarimax_petro_law,xreg=petro_law_mean)
+sarimax_f_tail <- forecast(sarimax_petro_law,xreg=petro_law_tail)
+autoplot(sarimax_f_mean)
+autoplot(sarimax_f_tail)
+naive_f_mean <- forecast::meanf(train[,'front'],h=12)
+naive_f_mean
+naive_f_latest <- forecast::rwf(train[,"front"],h=12)
+naive_f_latest
+forecast::accuracy(sarimax_f,x=test[,"front"])
+forecast::accuracy(sarimax_f_mean,x=test[,"front"])
+```{r}
+forecast::accuracy(sarimax_f_tail,x=test[,"front"])
+library(tidyverse)
+library(forecast)
+library(tseries)
+daily_data = read_csv('input/day.csv')
+daily_data
+ggplot(daily_data,aes(x=dteday,y=cnt))+
+geom_line()+
+scale_x_date('month')
+ggplot(daily_data,aes(x=dteday,y=cnt))+
+geom_line()+
+scale_x_date('month')+
+ylab("Daily Bike Checkouts")
+count_ts <- ts(daily_data[,c('cnt)])
+count_ts
+count_ts <- ts(daily_data[,c('cnt)])
+count_ts <- ts(daily_data[,c('cnt')])
+count_ts
+count_ts <- ts(daily_data[,c('cnt')])
+head(count_ts)
+daily_data$clean_cnt <- tsclean(count_ts)
+ggplot(data=daily_data,aes(x=dteday,y=clean_cnt))+
+geom_line()+
+ylab("Cleaned Bicycle Count")
+ggplot(data=daily_data,aes(x=dteday,y=clean_cnt))+
+geom_line()+
+scale_x_date('month')+
+ylab("Cleaned Bicycle Count")
+daily_data$cnt_ma <- forecast::ma(daily_data$clean_cnt,order=7)
+daily_data$cnt_ma30 <- forecast::ma(daily_data$clean_cnt,order=30)
+ggplot(data=daily_data,aes(x=dteday))+
+geom_line(aes(y=clean_cnt,color='Counts'))+
+geom_line(aes(y=cnt_ma,color='Weekly Moving Average'))+
+geom_line(aes(y=cnt_ma30,color='Monthly Moving Average'))+
+ggplot(data=daily_data,aes(x=dteday))+
+geom_line(aes(y=clean_cnt,color='Counts'))+
+geom_line(aes(y=cnt_ma,color='Weekly Moving Average'))+
+geom_line(aes(y=cnt_ma30,color='Monthly Moving Average'))+
+ylab("Bicycle Count")
+ggplot(data=daily_data,aes(x=dteday))+
+geom_line(aes(y=clean_cnt,color='Counts'))+
+geom_line(aes(y=cnt_ma,color='Weekly Moving Average'))+
+geom_line(aes(y=cnt_ma30,color='Monthly Moving Average'))+
+ylab("Bicycle Count")
+count_ma <- ts(na.omit(daily_data$cnt_ma),frequency = 30)
+count_ma
+count_ma <- ts(na.omit(daily_data$cnt_ma),frequency = 30)
+head(count_ma)
+decomp <- stl(count_ma,s.window = "periodic")
+deseasonal_cnt <- seasadj(decomp)
+plot(decomp)
+decomp <- stl(count_ma,s.window = "periodic",allow.multiplicative.trend=TRUE)
+?stl
+?seasadj
+deseasonal_cnt
+adf.test(count_ma, alternative = "stationary")
+Acf(count_ma)
+adf.test(count_ma, alternative = "stationary")
+Acf(count_ma)
+Pacf(count_ma)
+count_d1 <- diff(deseasonal_cnt,differences = 1)
+count_d1 <- diff(deseasonal_cnt,differences = 1)
+plot(count_1)
+count_d1 <- diff(deseasonal_cnt,differences = 1)
+plot(count_d1)
+adf.test(count_d1,alternative = 'stationary')
+Acf(count_d1, main='ACF for Differenced Series')
+Pacf(count_d1, main='PACF for Differenced Series')
+auto.arima(deseasonal_cnt, seasonal=FALSE)
+fit<-auto.arima(deseasonal_cnt, seasonal=FALSE)
+tsdisplay(residuals(fit), lag.max=45, main='(1,1,1) Model Residuals')
+y1 <- ar1(0,200,0,0.7,1)
+ggtsdisplay(ts(y1),main="AR(1)過程")
+y1 <- ar1(0,200,0,0.7,1)
+ggtsdisplay(ts(y1),main="AR(1)過程")
+str(Seatbelts)
+as_tibble(Seatbelts)
+tibble(date=as.Date(as.yearmon(time(Seatbelts))))
+tibble(date=as.Date(as.yearmon(time(Seatbelts)))) %>%
+bind_cols(as_tibble(Seatbelts))
+dat <- tibble(date=as.Date(as.yearmon(time(Seatbelts)))) %>%
+bind_cols(as_tibble(Seatbelts))
+head(Seatbelts) # Rに組み込みのSeatbeltsデータ
+petro_law <- train[,c("PetrolPrice","law")]
+model_sarimax <- Arima(
+y = train[,"front"],
+order = c(1,1,1),
+seasonal = list(order=c(1,0,0)),
+xreg = petro_law
+)
+model_sarimax
+ls
+library(gridExtra)
+library(urca)
+library(lmtest)
+library(prais)
+library(tidyverse)
+library(ggfortify)
+library(gridExtra)
+n_sample <- 400
+y_wn <- rnorm(n_sample)
+x_wn <- rnorm(n_sample)
+lm(y_wn~x_wn)
+n_sample <- 400
+y_wn <- rnorm(n_sample)
+x_wn <- rnorm(n_sample)
+model_ols_wn <- lm(y_wn~x_wn)
+summary(model_wn_wn)
+n_sample <- 400
+y_wn <- rnorm(n_sample)
+x_wn <- rnorm(n_sample)
+model_ols_wn <- lm(y_wn~x_wn)
+summary(model_ols_wn)
+x_rw <- cumsum(rnorm(n_sample))
+y_rw <- cumsum(rnorm(n_sample))
+x_rw <- cumsum(rnorm(n_sample))
+model_ols_rw <- lm(y_rw~x_rw)
+summary(model_ols_rw)
+y_rw <- cumsum(rnorm(n_sample))
+x_rw <- cumsum(rnorm(n_sample))
+model_ols_rw <- lm(y_rw~x_rw)
+summary(model_ols_rw)
+y_rw <- cumsum(rnorm(n_sample))
+x_rw <- cumsum(rnorm(n_sample))
+model_ols_rw <- lm(y_rw~x_rw)
+summary(model_ols_rw)
+y_rw <- cumsum(rnorm(n_sample))
+x_rw <- cumsum(rnorm(n_sample))
+model_ols_rw <- lm(y_rw~x_rw)
+summary(model_ols_rw)
+y_rw <- cumsum(rnorm(n_sample))
+x_rw <- cumsum(rnorm(n_sample))
+model_ols_rw <- lm(y_rw~x_rw)
+summary(model_ols_rw)
+y_rw <- cumsum(rnorm(n_sample))
+x_rw <- cumsum(rnorm(n_sample))
+model_ols_rw <- lm(y_rw~x_rw)
+summary(model_ols_rw)
+df_wn <- tibble(x_wn =x_wn,y_wn=y_wn)
+p_wn <- ggplot(df_wn,aes(x=x_wn,y=y_wn))+
+geom_point()+
+geom_smooth(mothod='lm',color=1)
+df_rw <- tibble(x_rw=x_rw,y_rw=y_rw)
+p_rw <- ggplot(df_rw,aes(x=x_rw,y=y_rw))+
+geom_point()+
+geom_smooth(mothod='lm',color=1)
+grid.arrange(p_)
+df_wn <- tibble(x_wn =x_wn,y_wn=y_wn)
+p_wn <- ggplot(df_wn,aes(x=x_wn,y=y_wn))+
+geom_point()+
+geom_smooth(mothod='lm',color=1)
+df_rw <- tibble(x_rw=x_rw,y_rw=y_rw)
+p_rw <- ggplot(df_rw,aes(x=x_rw,y=y_rw))+
+geom_point()+
+geom_smooth(mothod='lm',color=1)
+grid.arrange(p_wn,p_rw)
+df_wn <- tibble(x_wn =x_wn,y_wn=y_wn)
+p_wn <- ggplot(df_wn,aes(x=x_wn,y=y_wn))+
+geom_point()+
+geom_smooth(method='lm',color=1)
+df_rw <- tibble(x_rw=x_rw,y_rw=y_rw)
+p_rw <- ggplot(df_rw,aes(x=x_rw,y=y_rw))+
+geom_point()+
+geom_smooth(method='lm',color=1)
+grid.arrange(p_wn,p_rw)

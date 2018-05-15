@@ -1,0 +1,11 @@
+"0","```r
+print(class(Seatbelts[,'front']))
+```"
+"1","[1] \"ts\"
+"
+"0","```r
+ggplot2::autoplot(Seatbelts[,\"front\"],
+                  main=\"イギリスの交通事故死傷者数（前席）\",
+                  xlab=\"年\",
+                  ylab=\"死傷者数\")
+```"

@@ -1,0 +1,16 @@
+"0","```r
+count_ts <- ts(daily_data[,c('cnt')])
+head(count_ts)
+```"
+"1","Time Series:
+Start = 1 
+End = 6 
+Frequency = 1 
+      cnt
+[1,]  985
+[2,]  801
+[3,] 1349
+[4,] 1562
+[5,] 1600
+[6,] 1606
+"

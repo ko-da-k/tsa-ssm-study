@@ -1,0 +1,7 @@
+setwd('part2')
+library(tidyverse)
+dat <- read_csv('input/5-2-1-timeSeries.csv')
+dat
+ggplot(dat,aes(x=time,y=data))+
+  geom_point()+
+  

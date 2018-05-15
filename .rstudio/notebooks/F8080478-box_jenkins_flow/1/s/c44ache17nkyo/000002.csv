@@ -1,0 +1,9 @@
+"0","```r
+tseries::jarque.bera.test(resid(sarimax_petro_law))
+```"
+"1","
+	Jarque Bera Test
+
+data:  resid(sarimax_petro_law)
+X-squared = 0.39938, df = 2, p-value = 0.819
+"

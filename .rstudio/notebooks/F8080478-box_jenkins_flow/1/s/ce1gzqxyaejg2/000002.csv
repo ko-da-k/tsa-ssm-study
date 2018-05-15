@@ -1,0 +1,17 @@
+"0","```r
+Arima(
+  y=log_diff,order=c(1,0,0),
+  seasonal = list(order=c(0,1,0))
+)
+```"
+"1","Series: log_diff 
+ARIMA(1,0,0)(0,1,0)[12] 
+
+Coefficients:
+          ar1
+      -0.3951
+s.e.   0.0685
+
+sigma^2 estimated as 0.01569:  log likelihood=118.26
+AIC=-232.52   AICc=-232.45   BIC=-226.15
+"

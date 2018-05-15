@@ -1,0 +1,8 @@
+"0","```r
+sarimax_f <- forecast(
+  sarimax_petro_law, # model
+  xreg = petro_law_test, # test data
+  h = 12, # predict 12 periods
+  level=c(95,70), #output 95% and 70% prediction interval
+)
+```"

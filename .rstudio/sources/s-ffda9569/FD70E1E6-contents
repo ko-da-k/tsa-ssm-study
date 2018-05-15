@@ -1,0 +1,96 @@
+---
+title: "見せかけの回帰"
+output: html_notebook
+---
+
+
+```{r}
+library(urca)
+library(lmtest)
+library(prais)
+library(tidyverse)
+library(ggfortify)
+library(gridExtra)
+```
+
+## 全く関係のないデータでの回帰分析
+
+```{r}
+n_sample <- 400
+y_wn <- rnorm(n_sample)
+x_wn <- rnorm(n_sample)
+model_ols_wn <- lm(y_wn~x_wn)
+summary(model_ols_wn)
+```
+
+$H_0: x_{wn}= 0$は棄却されない．
+
+「見せかけの回帰」
+
+```{r}
+y_rw <- cumsum(rnorm(n_sample))
+x_rw <- cumsum(rnorm(n_sample))
+model_ols_rw <- lm(y_rw~x_rw)
+summary(model_ols_rw)
+```
+
+
+```{r}
+df_wn <- tibble(x_wn =x_wn,y_wn=y_wn)
+p_wn <- ggplot(df_wn,aes(x=x_wn,y=y_wn))+
+  geom_point()+
+  geom_smooth(method='lm',color=1)
+df_rw <- tibble(x_rw=x_rw,y_rw=y_rw)
+p_rw <- ggplot(df_rw,aes(x=x_rw,y=y_rw))+
+  geom_point()+
+  geom_smooth(method='lm',color=1)
+grid.arrange(p_wn,p_rw)
+```
+
+## AR過程からのサンプル
+```{r}
+y_ar <- arima.sim(n_sample,
+                  model=list(order=c(1,0,0),ar=c(0.8)))
+x_ar <- arima.sim(n_sample,
+                  model=list(order=c(1,0,0),ar=c(0.8)))
+summary(lm(y_ar~x_ar))
+```
+
+
+```{r}
+df_ar <- tibble(x_ar =x_ar,y_wn=y_ar)
+p_ar <- ggplot(df_wn,aes(x=x_ar,y=y_ar))+
+  geom_point()+
+  geom_smooth(method='lm',color=1)
+p_ar
+```
+
+
+## Durbin-Watson(DW)検定
+```{r}
+resid_ols <- model_ols_rw$residuals
+dw <- sum(diff(resid_ols)^2) / sum(resid_ols^2)
+dw
+```
+
+
+```{r}
+lmtest::dwtest(model_ols_wn)
+```
+
+```{r}
+lmtest::dwtest(model_ols_rw)
+```
+
+よくみると片側検定になってるな
+
+```{r}
+lmtest::dwtest(model_ols_rw,alternative = "two.sided")
+```
+
+
+## GLS
+
+AR(1)の場合
+$y_t=\beta_0+\beta_1x_t+u_t, u_t\sim AR(1)$.
+

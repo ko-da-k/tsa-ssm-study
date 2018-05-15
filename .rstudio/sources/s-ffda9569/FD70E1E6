@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1526398347012.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2846958914",
+    "id" : "FD70E1E6",
+    "lastKnownWriteTime" : 1526427267,
+    "last_content_update" : 1526427267724,
+    "path" : "~/part3/SpuriousRegression.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "96,0",
+        "scrollLine" : "83",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

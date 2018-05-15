@@ -1,0 +1,6 @@
+"0","```r
+ggplot2::autoplot(log(Seatbelts[,\"front\"]),
+                  main=\"イギリスの交通事故死傷者数（前席）\",
+                  xlab=\"年\",
+                  ylab=\"死傷者数\")
+```"

@@ -1,0 +1,5 @@
+"0","```r
+abs(polyroot(c(1,-coef(sarimax_petro_law)[c(\"sma1\")])))
+```"
+"1","[1] 1.222057
+"

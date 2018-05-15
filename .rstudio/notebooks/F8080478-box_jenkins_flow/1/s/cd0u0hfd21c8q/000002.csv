@@ -1,0 +1,7 @@
+"0","```r
+ts(mat_with_name,start=c(2000,1),freq=12)
+```"
+"1","         col1 col2 col3 col4
+Jan 2000    1    3    5    7
+Feb 2000    2    4    6    8
+"

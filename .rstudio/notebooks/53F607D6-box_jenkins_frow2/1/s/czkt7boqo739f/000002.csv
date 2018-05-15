@@ -1,0 +1,10 @@
+"0","```r
+count_ma <- ts(na.omit(daily_data$cnt_ma),frequency = 30)
+head(count_ma)
+```"
+"1","Time Series:
+Start = c(1, 1) 
+End = c(1, 6) 
+Frequency = 30 
+[1] 1344.714 1341.000 1344.000 1340.000 1297.286 1234.714
+"

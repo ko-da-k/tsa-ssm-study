@@ -1,0 +1,24 @@
+"0","```r
+library(xts)
+```"
+"1","Loading required package: zoo
+
+Attaching package: ‘zoo’
+
+The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+
+Attaching package: ‘xts’
+
+The following objects are masked from ‘package:dplyr’:
+
+    first, last
+"
+"0","```r
+library(forecast)
+library(urca)
+library(ggplot2)
+library(ggfortify)
+```"

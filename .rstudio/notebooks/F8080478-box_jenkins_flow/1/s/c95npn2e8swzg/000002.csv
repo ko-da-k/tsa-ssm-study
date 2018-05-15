@@ -1,0 +1,5 @@
+"0","```r
+ndiffs(log(Seatbelts[,'front']))
+```"
+"1","[1] 1
+"

@@ -1,0 +1,7 @@
+"0","resid_ols <- model_ols_rw$residuals"
+"0","dw <- sum(diff(resid_ols)^2) / sum(resid_ols^2)"
+"0","dw"
+"1","[1]"
+"1"," 0.05622173"
+"1","
+"

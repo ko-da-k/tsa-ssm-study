@@ -1,0 +1,4 @@
+"0","```r
+train <- window(Seatbelts_log,end=c(1983,12))
+test <- window(Seatbelts_log,start=c(1984,1))
+```"

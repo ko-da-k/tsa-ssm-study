@@ -1,0 +1,7 @@
+"0","```r
+ggplot(data=daily_data,aes(x=dteday))+
+  geom_line(aes(y=clean_cnt,color='Counts'))+
+  geom_line(aes(y=cnt_ma,color='Weekly Moving Average'))+
+  geom_line(aes(y=cnt_ma30,color='Monthly Moving Average'))+
+  ylab(\"Bicycle Count\")
+```"

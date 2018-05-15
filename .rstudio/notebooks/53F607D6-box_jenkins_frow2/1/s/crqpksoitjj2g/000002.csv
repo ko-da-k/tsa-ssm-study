@@ -1,0 +1,5 @@
+"0","```r
+decomp <- stl(count_ma,s.window = \"periodic\")
+deseasonal_cnt <- seasadj(decomp)
+plot(decomp)
+```"

@@ -1,0 +1,4 @@
+"0","```r
+seas_log_diff <- diff(log_diff,lag=frequency((log_diff)))
+ggtsdisplay(seas_log_diff,main='季節差分系列')
+```"

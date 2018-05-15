@@ -1,0 +1,6 @@
+"0","```r
+ggplot(data=daily_data,aes(x=dteday,y=clean_cnt))+
+  geom_line()+
+  scale_x_date('month')+
+  ylab(\"Cleaned Bicycle Count\")
+```"

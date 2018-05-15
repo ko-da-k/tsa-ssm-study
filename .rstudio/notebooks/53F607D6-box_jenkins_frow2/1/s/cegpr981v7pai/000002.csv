@@ -1,0 +1,14 @@
+"0","```r
+auto.arima(deseasonal_cnt, seasonal=FALSE)
+```"
+"1","Series: deseasonal_cnt 
+ARIMA(1,1,1) 
+
+Coefficients:
+         ar1      ma1
+      0.5510  -0.2496
+s.e.  0.0751   0.0849
+
+sigma^2 estimated as 26180:  log likelihood=-4708.91
+AIC=9423.82   AICc=9423.85   BIC=9437.57
+"

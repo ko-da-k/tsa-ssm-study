@@ -1,0 +1,14 @@
+"0","```r
+sarimax_petro_law
+```"
+"1","Series: train[, \"front\"] 
+Regression with ARIMA(2,0,1)(0,1,1)[12] errors 
+
+Coefficients:
+         ar1      ar2      ma1     sma1  PetrolPrice      law
+      1.1225  -0.1322  -0.8690  -0.8183      -0.3748  -0.3431
+s.e.  0.0906   0.0876   0.0443   0.1129       0.1000   0.0473
+
+sigma^2 estimated as 0.007624:  log likelihood=168.12
+AIC=-322.23   AICc=-321.53   BIC=-300.36
+"

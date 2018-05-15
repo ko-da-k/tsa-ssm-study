@@ -1,0 +1,137 @@
+---
+title: "Box-Jenkins flow"
+output: html_notebook
+---
+
+
+
+```{r}
+library(tidyverse)
+library(forecast)
+library(tseries)
+```
+
+```{r}
+daily_data = read_csv('input/day.csv')
+daily_data
+```
+
+
+```{r}
+ggplot(daily_data,aes(x=dteday,y=cnt))+
+  geom_line()+
+  scale_x_date('month')+
+  ylab("Daily Bike Checkouts")
+```
+
+- 冬はバイクレンタル数が減り，夏は増える．
+- 全体として，レンタル数は伸びている.
+
+
+
+```{r}
+count_ts <- ts(daily_data[,c('cnt')])
+head(count_ts)
+```
+```{r}
+daily_data$clean_cnt <- tsclean(count_ts)
+```
+
+```{r}
+ggplot(data=daily_data,aes(x=dteday,y=clean_cnt))+
+  geom_line()+
+  scale_x_date('month')+
+  ylab("Cleaned Bicycle Count")
+```
+
+## Moving Averageによる平滑化
+
+```{r}
+daily_data$cnt_ma <- forecast::ma(daily_data$clean_cnt,order=7)
+daily_data$cnt_ma30 <- forecast::ma(daily_data$clean_cnt,order=30)
+```
+
+```{r}
+ggplot(data=daily_data,aes(x=dteday))+
+  geom_line(aes(y=clean_cnt,color='Counts'))+
+  geom_line(aes(y=cnt_ma,color='Weekly Moving Average'))+
+  geom_line(aes(y=cnt_ma30,color='Monthly Moving Average'))+
+  ylab("Bicycle Count")
+```
+
+## Decompose Data
+
+- Seasonal component
+- Trend component
+- Cycle component
+
+seasonal componentはカレンダーのサイクルに関連した変動．例えば，夏にはバイクに乗る人が増え，冬には減るなど．
+
+Trend componentは全体的なパターン．次第にレンタル数は増えているなど．
+
+Cycle componentはseasonalでない増加減少のパターン．trendとグルーピングされる．
+
+
+$$
+Y = S_t\times T_t \times E_t
+$$
+
+$$
+Y = S_t+T_t + E_t
+$$
+
+
+```{r}
+count_ma <- ts(na.omit(daily_data$cnt_ma),frequency = 30)
+head(count_ma)
+```
+
+
+
+```{r}
+decomp <- stl(count_ma,s.window = "periodic")
+deseasonal_cnt <- seasadj(decomp)
+plot(decomp)
+```
+
+
+## Stationarity
+
+```{r}
+adf.test(count_ma, alternative = "stationary")
+```
+
+```{r}
+Acf(count_ma)
+```
+
+```{r}
+Pacf(count_ma)
+```
+
+
+```{r}
+count_d1 <- diff(deseasonal_cnt,differences = 1)
+plot(count_d1)
+```
+
+```{r}
+adf.test(count_d1,alternative = 'stationary')
+```
+
+
+```{r}
+Acf(count_d1, main='ACF for Differenced Series')
+Pacf(count_d1, main='PACF for Differenced Series')
+```
+
+
+```{r}
+auto.arima(deseasonal_cnt, seasonal=FALSE)
+```
+
+```{r}
+fit<-auto.arima(deseasonal_cnt, seasonal=FALSE)
+tsdisplay(residuals(fit), lag.max=45, main='(1,1,1) Model Residuals')
+```
+

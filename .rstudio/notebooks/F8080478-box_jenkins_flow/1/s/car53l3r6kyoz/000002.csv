@@ -1,0 +1,4 @@
+"0","```r
+log_diff <- diff(log_front,lag=1)
+ggtsdisplay(log_diff,main=\"対数差分系列\")
+```"

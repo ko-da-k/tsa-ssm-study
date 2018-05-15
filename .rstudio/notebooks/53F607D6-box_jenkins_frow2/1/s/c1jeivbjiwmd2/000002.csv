@@ -1,0 +1,13 @@
+"0","```r
+adf.test(count_ma, alternative = \"stationary\")
+
+```"
+"1","p-value greater than printed p-value
+"
+"1","
+	Augmented Dickey-Fuller Test
+
+data:  count_ma
+Dickey-Fuller = -0.2557, Lag order = 8, p-value = 0.99
+alternative hypothesis: stationary
+"

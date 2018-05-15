@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1525992807849.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D8D94789",
+    "lastKnownWriteTime" : 1525570998,
+    "last_content_update" : 1525992811968,
+    "path" : "~/part2/notebook/box_jenkins_flow.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "61,10",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

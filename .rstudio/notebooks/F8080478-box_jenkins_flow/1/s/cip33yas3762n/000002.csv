@@ -1,0 +1,16 @@
+"0","```r
+summary(ur.kpss(log(Seatbelts[,'front'])))
+```"
+"1","
+####################### 
+# KPSS Unit Root Test # 
+####################### 
+
+Test is of type: mu with 4 lags. 
+
+Value of test-statistic is: 2.3004 
+
+Critical value for a significance level of: 
+                10pct  5pct 2.5pct  1pct
+critical values 0.347 0.463  0.574 0.739
+"

@@ -1,0 +1,5 @@
+"0","```r
+Seatbelts_log <- Seatbelts[,c(\"front\",\"PetrolPrice\",\"law\")]
+Seatbelts_log[,\"front\"] <- log(Seatbelts_log[,\"front\"])
+Seatbelts_log[,\"PetrolPrice\"] <- log(Seatbelts_log[,\"PetrolPrice\"])
+```"

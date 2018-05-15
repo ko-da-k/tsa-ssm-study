@@ -1,0 +1,5 @@
+"0","```r
+forecast::ndiffs(log(Seatbelts[,'front']),test='kpss')
+```"
+"1","[1] 1
+"

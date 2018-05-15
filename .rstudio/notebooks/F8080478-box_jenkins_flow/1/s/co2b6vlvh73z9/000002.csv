@@ -1,0 +1,17 @@
+"0","```r
+Arima(
+  y=log_diff,order=c(1,0,0),
+  include.mean = F
+)
+```"
+"1","Series: log_diff 
+ARIMA(1,0,0) with zero mean 
+
+Coefficients:
+          ar1
+      -0.2058
+s.e.   0.0706
+
+sigma^2 estimated as 0.0202:  log likelihood=102.1
+AIC=-200.21   AICc=-200.15   BIC=-193.7
+"

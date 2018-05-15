@@ -1,0 +1,775 @@
+1525194732065:setwd('part2')
+1525194741040:library(tidyverse)
+1525194762338:read_csv('input/5-2-1-timeSeries.csv')
+1525194768696:dat <- read_csv('input/5-2-1-timeSeries.csv')
+1525194771022:dat
+1525194789696:ggplot(dat,aes(x=time,y=data))+
+1525194789710:geom_line()
+1525194810290:ggplot(dat,aes(x=time,y=data))+
+1525194810304:geom_point()
+1525496424886:library(ggfortify)
+1525496427162:library(xts)
+1525496427350:library(forecast)
+1525496427790:library(urca)
+1525496427821:library(ggplot2)
+1525496427838:library(ggfortify)
+1525496472050:ts_sample <- ts(1:36,start = c(2000,1),freq=12)
+1525496472143:ts_sample
+1525496757042:ts_freq4 <- ts(1:8,start=c(2000,1),freq=4)
+1525496764271:ts_freq4 <- ts(1:8,start=c(2000,1),freq=4)
+1525496764285:ts_freq4
+1525496803520:mat_with_name =matrix(1:8)
+1525496803539:mat_with_name
+1525496861204:mat_with_name =matrix(1:8,ncol=4)
+1525496861219:mat_with_name
+1525496913806:mat_with_name =matrix(1:8,
+1525496913816:ncol=4,
+1525496913831:dimnames = list(c("row1","row2"),c("col1","col2","col3","col4")))
+1525496913850:mat_with_name
+1525496922393:ts(mat_with_name)
+1525496943679:ts(mat_with_name,start=c(2000,1))
+1525496950604:ts(mat_with_name,start=c(2000,1),freq=4)
+1525496965936:ts(mat_with_name,start=c(2000,1),freq=12)
+1525496999725:window(ts_freq4,start=c(2000,2),end=c(2001,1))
+1525497020313:Seatbelts
+1525497033219:head(Seatbelts)
+1525497048764:print(head(Seatbelts))
+1525497049010:print(tail(Seatbelts))
+1525497087250:print(head(Seatbelts))
+1525497087494:print(tail(Seatbelts))
+1525497087743:print(class(Seatbelts))
+1525497110349:print(head(Seatbelts))
+1525497110614:print(tail(Seatbelts))
+1525497110877:print(class(Seatbelts))
+1525497110910:?Seatbelts
+1525497168647:subset(Seatbelts[,front],month=3)
+1525497180323:subset(Seatbelts[,"front"],month=3)
+1525497489211:xts_sample <- as.xts(1:5,
+1525497489234:dimnames=list(c("2000-01-01","2000-01-02","2000-01-03","2000-01-04","2000-01-05")))
+1525497511336:xts_sample <- as.xts(1:5,
+1525497511355:dimnames=list(c("2000-01-01","2000-01-02","2000-01-03","2000-01-04","2000-01-05")),
+1525497511372:ncol=1)
+1525497524181:xts_sample <- as.xts(matrix(1:5,
+1525497524196:dimnames=list(c("2000-01-01","2000-01-02","2000-01-03","2000-01-04","2000-01-05"))),
+1525497524210:ncol=1)
+1525497524257:xts_sample
+1525498567369:xts_sample['2001-01-1']
+1525498572227:xts_sample['2001-01-01']
+1525498580079:xts_sample['2000-01-01']
+1525498584672:xts_sample['2000-01-02']
+1525498610715:print(xts_sample['2000-01-02'])
+1525498610757:print(xts_sample["2000-01-02::"])
+1525498654932:print(xts_sample['2000-01-02'])
+1525498654968:print(xts_sample["2000-01-02::"])
+1525498655027:print(xts_sample["2000-01-02::2000-01-04"]
+1525498670093:print(xts_sample['2000-01-02'])
+1525498670125:print(xts_sample["2000-01-02::"])
+1525498670188:print(xts_sample["2000-01-02::2000-01-04"])
+1525498797031:file_data <- read.csv("input/5-2-1-timeSeries.csv")
+1525498797065:file_data
+1525498816927:file_data <- read_csv("input/5-2-1-timeSeries.csv")
+1525498817041:file_data
+1525498837380:file_data <- read.csv("input/5-2-1-timeSeries.csv")
+1525498837426:file_data
+1525498837544:str(file_data)
+1525499051764:file_data <- read_csv("input/5-2-1-timeSeries.csv")
+1525499051840:file_data
+1525499089355:as.ats(file_data)
+1525499093522:as.xts(file_data)
+1525499103026:as.xts(read.zoo(file_data))
+1525499122994:file_data_xts <- as.xts(read.zoo(file_data))
+1525499123018:class(file_data_xts)
+1525499777510:file_data_xts <- as.xts(read.zoo(file_data))
+1525499777536:file_data_xts
+1525499914949:ggplot2::autoplot(Seatbelts[,"front"])
+1525499945376:ggplot2::autoplot(Seatbelts[,"front"])
+1525500270293:ggplot2::autoplot(Seatbelts[,"front"],
+1525500270311:main="イギリスの交通事故死傷者数（前席）")
+1525500305003:ggplot2::autoplot(Seatbelts[,"front"],
+1525500305026:main="イギリスの交通事故死傷者数（前席）",
+1525500305047:xlab="年",
+1525500305067:yylab="死傷者数")
+1525500317009:ggplot2::autoplot(Seatbelts[,"front"],
+1525500317025:main="イギリスの交通事故死傷者数（前席）",
+1525500317041:xlab="年",
+1525500317056:ylab="死傷者数")
+1525500611499:ggplot2::autoplot(Seatbelts[,"front"],
+1525500611519:main="イギリスの交通事故死傷者数（前席）",
+1525500611533:xlab="年",
+1525500611545:ylab="死傷者数")+theme_gray (base_family = "HiraKakuPro-W3")
+1525500675119:ggplot(file_data)
+1525500702177:ggplot(file_data,aes(x=time,y=front))+
+1525500702194:geom_line()
+1525500720983:ggplot(file_data,aes(x=time,y=data))+
+1525500720998:geom_line()
+1525501680491:ggplot(file_data,aes(x=time,y=data))+
+1525501680510:geom_line()+theme_gray(base_family = "HiraKakuPro-W3")
+1525501701533:ggplot2::autoplot(Seatbelts[,"front"],
+1525501701550:main="イギリスの交通事故死傷者数（前席）",
+1525501701566:xlab="年",
+1525501701580:ylab="死傷者数")
+1525502605277:source('~/.active-rstudio-document', echo=TRUE)
+1525502607848:library(tidyverse)
+1525502609077:setwd('part2')
+1525502610055:dat
+1525502610417:ggplot(dat,aes(x=time,y=data))+
+1525502610431:geom_point()
+1525502623672:library(xts)
+1525502623859:library(forecast)
+1525502624327:library(urca)
+1525502624363:library(ggplot2)
+1525502624387:library(ggfortify)
+1525502630447:ggplot2::autoplot(Seatbelts[,"front"],
+1525502630461:main="イギリスの交通事故死傷者数（前席）",
+1525502630477:xlab="年",
+1525502630490:ylab="死傷者数")
+1525502638944:ggplot(file_data,aes(x=time,y=data))+
+1525502638962:geom_line()+theme_gray(base_family = "HiraKakuPro-W3")
+1525502645689:file_data <- read_csv("input/5-2-1-timeSeries.csv")
+1525502645873:file_data
+1525502647856:ggplot(file_data,aes(x=time,y=data))+
+1525502647872:geom_line()+theme_gray(base_family = "HiraKakuPro-W3")
+1525504670030:ts_sample <- ts(1:36,start = c(2000,1),freq=12)
+1525504670055:ts_sample
+1525504671497:ts_freq4 <- ts(1:8,start=c(2000,1),freq=4)
+1525504671513:ts_freq4
+1525504674414:mat_with_name =matrix(1:8,
+1525504674426:ncol=4,
+1525504674435:dimnames = list(c("row1","row2"),c("col1","col2","col3","col4")))
+1525504674504:mat_with_name
+1525504676101:ts(mat_with_name,start=c(2000,1),freq=12)
+1525504677685:window(ts_freq4,start=c(2000,2),end=c(2001,1))
+1525504680064:print(head(Seatbelts))
+1525504680309:print(tail(Seatbelts))
+1525504680603:print(class(Seatbelts))
+1525504680653:?Seatbelts
+1525504682484:subset(Seatbelts[,"front"],month=3)
+1525504684871:xts_sample <- as.xts(matrix(1:5,
+1525504684887:dimnames=list(c("2000-01-01","2000-01-02","2000-01-03","2000-01-04","2000-01-05"))),
+1525504684900:ncol=1)
+1525504684927:xts_sample
+1525504687652:print(xts_sample['2000-01-02'])
+1525504687685:print(xts_sample["2000-01-02::"])
+1525504687731:print(xts_sample["2000-01-02::2000-01-04"])
+1525504752931:Seatbelts[,'front']
+1525504762712:class(Seatbelts[,'front'])
+1525504801599:print(class(Seatbelts[,'front']))
+1525504801620:ggplot2::autoplot(Seatbelts[,"front"],
+1525504801632:main="イギリスの交通事故死傷者数（前席）",
+1525504801697:xlab="年",
+1525504801726:ylab="死傷者数")
+1525504935263:ggplot2::autoplot(log(Seatbelts[,"front"]),
+1525504935277:main="イギリスの交通事故死傷者数（前席）",
+1525504935286:xlab="年",
+1525504935302:ylab="死傷者数")
+1525506298946:summary(ur.kpss(log(Seatbelts[,'front'])))
+1525506407897:ndiffs(log(Seatbelts[,'front']))
+1525506419553:?ndiffs
+1525506612949:summary(forecast::ndiffs(log(Seatbelts[,'front'])))
+1525506624408:forecast::ndiffs(log(Seatbelts[,'front']),test='pp')
+1525506627958:forecast::ndiffs(log(Seatbelts[,'front']),test='adf')
+1525506636911:forecast::ndiffs(log(Seatbelts[,'front']),test='kpss')
+1525506700742:library(tseries)
+1525506775311:front <- Seatbelts[,'front']
+1525506780379:front <- Seatbelts[,'front']
+1525506780406:front
+1525507120226:dat <- Seatbelts %>% select(front,PetroPrice,law)
+1525507133010:dat <- as_tibble(Seatbelts) %>% select(front,PetroPrice,law)
+1525507163677:dat <- as_tibble(Seatbelts) %>% select(front,PetrolPrice,law)
+1525507163720:dat
+1525507275013:dat <- as_tibble(date=index(Seatbelts),Seatbelts) %>% select(front,PetrolPrice,law)
+1525507275040:dat
+1525507280909:dat <- as_tibble(date=index(Seatbelts),Seatbelts) %>% select(date,front,PetrolPrice,law)
+1525507303593:as_tibble(date=index(Seatbelts),Seatbelts)
+1525507311160:tibble(date=index(Seatbelts),Seatbelts)
+1525507317194:tibble(date=index(Seatbelts))
+1525507327831:head(Seatbelts)
+1525507340782:index(Seatbelts)
+1525507744012:log_front <- log(front)
+1525507744058:ggtsdisplay(log_front,main='対数系列')
+1525507831535:log_diff <- diff(log_front,lag=1)
+1525507831605:ggtsdisplay(log_diff,main="対数差分系列")
+1525507918735:ggsubseriesplot(front) #原系列
+1525508074467:seas_log_diff <- diff(log_diff,lag=frequency((log_diff)))
+1525508074497:ggtsdisplay(seas_log_diff,main='季節差分系列')
+1525508282758:Seatbelts_log <- Seatbelts[,c("front","PetroPrice","law")]
+1525508305110:Seatbelts_log <- Seatbelts[,c("front","PetrolPrice","law")]
+1525508305137:Seatbelts_log["front"] <- log(Seatbelts_log[,"front"])
+1525508328999:Seatbelts_log <- Seatbelts[,c("front","PetrolPrice","law")]
+1525508329025:Seatbelts_log["front"] <- log(Seatbelts[,"front"])
+1525508353662:Seatbelts_log <- Seatbelts[,c("front","PetrolPrice","law")]
+1525508353690:Seatbelts_log[,"front"] <- log(Seatbelts_log[,"front"])
+1525508353716:Seatbelts_log[,"PetrolPrice"] <- log(Seatbelts_log[,"PetrolPrice"])
+1525508409307:train <- window(Seatbelts_log,end=c(1983,12))
+1525508409364:test <- window(Seatbelts_log,start=c(1984,1))
+1525508532812:petro_law <- train[,c("PetrolPrice","law")]
+1525508602532:model_sarimax <- Arima(
+1525508602549:y = train[,"front"],
+1525508602561:order=c(1,1,1),
+1525508602576:seasonal=list(order=c(1,0,0)),
+1525508602600:xreg = petro_law
+1525508602621:)
+1525508636219:model_sarimax <- Arima(
+1525508636236:y = train[,"front"],
+1525508636247:order=c(1,1,1),
+1525508636269:seasonal=list(order=c(1,0,0)),
+1525508636294:xreg = petro_law
+1525508636314:)
+1525508680643:model_sarimax
+1525508764726:Arima(
+1525508764770:y=log_diff,order=c(1,0,0),
+1525508764793:include.mean = F
+1525508764820:)
+1525508821660:Arima(
+1525508821680:y=log_front,oder=c(1,1,0),include.mean = F
+1525508821693:)
+1525508830126:Arima(
+1525508830144:y=log_front,order=c(1,1,0),include.mean = F
+1525508830156:)
+1525509412833:Arima(
+1525509412859:y=seas_log_diff,
+1525509412884:order=c(1,0,0),
+1525509412917:include.mean = F
+1525509412975:)
+1525509474144:Arima(
+1525509474162:y=log_front,order=c(1,1,0),
+1525509474173:seasonal = list(order=c(0,1,0))
+1525509474184:)
+1525509485073:Arima(
+1525509485084:y=log_diff,order=c(1,0,0),
+1525509485096:seasonal = list(order=c(0,1,0))
+1525509485108:)
+1525509591430:sarimax_petro_law <- auto.arima(
+1525509591446:y=train[,"front"],
+1525509591459:xreg = petro_law,
+1525509591478:ic = "aic",
+1525509591494:max.order = 7,
+1525509591505:stepwise = T,
+1525509591516:approximation = F,
+1525509591527:parallel = T,
+1525509591537:num.cores = 4
+1525509591548:)
+1525509606043:sarimax_petro_law <- auto.arima(
+1525509606054:y=train[,"front"],
+1525509606065:xreg = petro_law,
+1525509606077:ic = "aic",
+1525509606086:max.order = 7,
+1525509606099:stepwise = F,
+1525509606108:approximation = F,
+1525509606120:parallel = T,
+1525509606129:num.cores = 4
+1525509606142:)
+1525510010759:sarimax_petro_law
+1525510401270:polyroot(c(1,-coef(sarimax_petro_law)[c("ar1","ar2")]))
+1525510407722:abs(polyroot(c(1,-coef(sarimax_petro_law)[c("ar1","ar2")])))
+1525510455129:abs(polyroot(c(1,-coef(sarimax_petro_law)[c("ma1","ma2","ma3")])))
+1525510469764:abs(polyroot(c(1,-coef(sarimax_petro_law)[c("ma1")])))
+1525510500847:abs(polyroot(c(1,-coef(sarimax_petro_law)[c("sma1")])))
+1525510532653:checkresiduals(sarimax_petro_law)
+1525510554095:checkresiduals(sarimax_petro_law)
+1525510694185:tseries::jarque.bera.test(resid(sarimax_petro_law))
+1525510844415:?jarque.bera.test
+1525511123384:head(test)
+1525511159886:petro_law_test <- test[,c("PetrolPrice","law")]
+1525511267971:sarimax_f <- forecast(
+1525511267998:sarimax_petro_law, # model
+1525511268022:xreg = petro_law_test, # test data
+1525511268045:h = 12, # predict 12 periods
+1525511268061:level=c(95,70), #output 95% and 70% prediction interval
+1525511268080:)
+1525511275310:sarimax_f
+1525511304921:autoplot(sarimax_f,predict.colour = 1)
+1525511390623:autoplot(sarimax_f,predict.colour = 1)
+1525511477977:petro_law_mean <- data.frame(
+1525511478021:PetrolPrice=rep(mean(train[,"PetrolPrice"]),12),
+1525511478079:law=rep(1,12)
+1525511478105:)
+1525511478138:petro_law_mean
+1525511530905:petro_law_tail <- data.frame(
+1525511530937:PetrolPrice=rep(tail(train[,"PetrolPrice"],n=1),12),
+1525511530960:law=rep(1,12)
+1525511530988:)
+1525511531042:petro_law_tail
+1525511575937:sarimax_f_mean <- forecast(sarimax_petro_law,xreg=petro_law_mean)
+1525511576087:sarimax_f_tail <- forecast(sarimax_petro_law,xreg=petro_law_tail)
+1525511592503:autoplot(sarimax_f_mean)
+1525511621314:autoplot(sarimax_f_tail)
+1525511695824:naive_f_mean <- forecast::meanf(train[,'front'],h=12)
+1525511695916:naive_f_mean
+1525511736021:naive_f_latest <- forecast::rwf(train[,"front"],h=12)
+1525511736119:naive_f_latest
+1525511821059:forecast::accuracy(sarimax_f,x=test[,"front"])
+1525511915003:forecast::accuracy(sarimax_f_mean,x=test[,"front"])
+1525511936087:```{r}
+1525511949760:forecast::accuracy(sarimax_f_tail,x=test[,"front"])
+1525693677887:library(tidyverse)
+1525693677904:library(forecast)
+1525693677920:library(tseries)
+1525693716831:daily_data = read_csv('input/day.csv')
+1525693716951:daily_data
+1525693799160:ggplot(daily_data,aes(x=dteday,y=cnt))+
+1525693799180:geom_line()+
+1525693799190:scale_x_date('month')
+1525693822175:ggplot(daily_data,aes(x=dteday,y=cnt))+
+1525693822192:geom_line()+
+1525693822205:scale_x_date('month')+
+1525693822216:ylab("Daily Bike Checkouts")
+1525693976138:count_ts <- ts(daily_data[,c('cnt)])
+1525693982507:count_ts
+1525693988759:count_ts <- ts(daily_data[,c('cnt)])
+1525693995290:count_ts <- ts(daily_data[,c('cnt')])
+1525693995311:count_ts
+1525694017162:count_ts <- ts(daily_data[,c('cnt')])
+1525694017183:head(count_ts)
+1525694058597:daily_data$clean_cnt <- tsclean(count_ts)
+1525694119464:ggplot(data=daily_data,aes(x=dteday,y=clean_cnt))+
+1525694119484:geom_line()+
+1525694119497:ylab("Cleaned Bicycle Count")
+1525694151186:ggplot(data=daily_data,aes(x=dteday,y=clean_cnt))+
+1525694151200:geom_line()+
+1525694151215:scale_x_date('month')+
+1525694151226:ylab("Cleaned Bicycle Count")
+1525695282766:daily_data$cnt_ma <- forecast::ma(daily_data$clean_cnt,order=7)
+1525695282836:daily_data$cnt_ma30 <- forecast::ma(daily_data$clean_cnt,order=30)
+1525695380002:ggplot(data=daily_data,aes(x=dteday))+
+1525695380019:geom_line(aes(y=clean_cnt,color='Counts'))+
+1525695380030:geom_line(aes(y=cnt_ma,color='Weekly Moving Average'))+
+1525695380042:geom_line(aes(y=cnt_ma30,color='Monthly Moving Average'))+
+1525695398659:ggplot(data=daily_data,aes(x=dteday))+
+1525695398671:geom_line(aes(y=clean_cnt,color='Counts'))+
+1525695398684:geom_line(aes(y=cnt_ma,color='Weekly Moving Average'))+
+1525695398695:geom_line(aes(y=cnt_ma30,color='Monthly Moving Average'))+
+1525695398707:ylab("Bicycle Count")
+1525695417167:ggplot(data=daily_data,aes(x=dteday))+
+1525695417183:geom_line(aes(y=clean_cnt,color='Counts'))+
+1525695417197:geom_line(aes(y=cnt_ma,color='Weekly Moving Average'))+
+1525695417210:geom_line(aes(y=cnt_ma30,color='Monthly Moving Average'))+
+1525695417225:ylab("Bicycle Count")
+1525696808202:count_ma <- ts(na.omit(daily_data$cnt_ma),frequency = 30)
+1525696808225:count_ma
+1525696834452:count_ma <- ts(na.omit(daily_data$cnt_ma),frequency = 30)
+1525696834474:head(count_ma)
+1525696876384:decomp <- stl(count_ma,s.window = "periodic")
+1525696876417:deseasonal_cnt <- seasadj(decomp)
+1525696876437:plot(decomp)
+1525696946374:decomp <- stl(count_ma,s.window = "periodic",allow.multiplicative.trend=TRUE)
+1525696982328:?stl
+1525697008693:?seasadj
+1525697086755:deseasonal_cnt
+1525697169821:adf.test(count_ma, alternative = "stationary")
+1525697245415:Acf(count_ma)
+1525697252608:adf.test(count_ma, alternative = "stationary")
+1525697261941:Acf(count_ma)
+1525697271368:Pacf(count_ma)
+1525697312786:count_d1 <- diff(deseasonal_cnt,differences = 1)
+1525697319349:count_d1 <- diff(deseasonal_cnt,differences = 1)
+1525697319366:plot(count_1)
+1525697324010:count_d1 <- diff(deseasonal_cnt,differences = 1)
+1525697324039:plot(count_d1)
+1525697344791:adf.test(count_d1,alternative = 'stationary')
+1525697381241:Acf(count_d1, main='ACF for Differenced Series')
+1525697381280:Pacf(count_d1, main='PACF for Differenced Series')
+1525697425320:auto.arima(deseasonal_cnt, seasonal=FALSE)
+1525697470744:fit<-auto.arima(deseasonal_cnt, seasonal=FALSE)
+1525697470916:tsdisplay(residuals(fit), lag.max=45, main='(1,1,1) Model Residuals')
+1525955830876:library(tidyverse)
+1525955830896:g <- function(t) t
+1525955830911:s <- function(t) sin(t)
+1525955968460:library(tidyverse)
+1525955968481:library(ts)
+1525955968496:g <- function(t) t
+1525955968513:s <- function(t) sin(t)
+1525955968526:days <- ts(1:8,start=c(2000,1),freq=4)
+1525955968539:days
+1525955986769:library(tidyverse)
+1525955986785:library(ts)
+1525955986875:g <- function(t) t
+1525955986894:s <- function(t) sin(t)
+1525955986907:days <- ts(1:8,start=c(2000,1),freq=4)
+1525955986920:g(days)
+1525955993816:library(tidyverse)
+1525955993831:library(ts)
+1525955993844:g <- function(t) t
+1525955993855:s <- function(t) sin(t)
+1525955993866:days <- ts(1:8,start=c(2000,1),freq=4)
+1525955993878:s(days)
+1525956042096:length(t)
+1525956047276:dim(t)
+1525956050974:t
+1525956061389:library(tidyverse)
+1525956061401:library(ts)
+1525956061418:g <- function(t) t
+1525956061435:s <- function(t) sin(t)
+1525956061447:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956061459:y <- g(t)+s(t)
+1525956064546:length(t)
+1525956078937:library(tidyverse)
+1525956078950:library(ts)
+1525956078965:g <- function(t) t
+1525956078977:s <- function(t) sin(t)
+1525956078988:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956079002:y <- g(t)+s(t)+rnorm(length(t),0,1)
+1525956087362:library(tidyverse)
+1525956087375:library(ts)
+1525956087391:g <- function(t) t
+1525956087404:s <- function(t) sin(t)
+1525956087416:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956087431:y <- g(t)+s(t)+rnorm(length(t),0,1)
+1525956087443:plot(t,y)
+1525956107250:library(tidyverse)
+1525956107267:library(ts)
+1525956107286:g <- function(t) t
+1525956107299:s <- function(t) sin(t)
+1525956107313:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956107326:y <- g(t)+s(t)+rnorm(length(t),0,0.1)
+1525956107340:plot(t,y)
+1525956118889:library(ts)
+1525956124691:library(xts)
+1525956138534:library(tidyverse)
+1525956138545:g <- function(t) t
+1525956138556:s <- function(t) sin(t)
+1525956138571:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956138582:y <- g(t)+s(t)+rnorm(length(t),0,0.1)
+1525956138597:plot(t,y)
+1525956274644:library(tidyverse)
+1525956274664:g <- function(t) t
+1525956274681:s <- function(t) sin(t)
+1525956274692:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956274708:y <- g(t)+s(t)+rnorm(length(t),0,0.1)
+1525956274727:plot(t,y)
+1525956274758:plot(t,g)
+1525956274778:par(new=T)
+1525956274794:plot(t,s)
+1525956289711:library(tidyverse)
+1525956289731:g <- function(t) t
+1525956289751:s <- function(t) sin(t)
+1525956289764:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956289779:y <- g(t)+s(t)+rnorm(length(t),0,0.1)
+1525956289793:plot(t,y)
+1525956289816:plot(t,g(t))
+1525956289878:par(new=T)
+1525956289894:plot(t,s(t))
+1525956352681:library(tidyverse)
+1525956352700:g <- function(t) t
+1525956352714:s <- function(t) sin(t)
+1525956352728:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956352743:y <- g(t)+s(t)+rnorm(length(t),0,0.1)
+1525956352756:plot(t,y)
+1525956352787:plot(t,g(t),ylim=c(1,7))
+1525956352844:par(new=T)
+1525956352855:plot(t,s(t),ylim=c(1,7))
+1525956360630:library(tidyverse)
+1525956360645:g <- function(t) t
+1525956360659:s <- function(t) sin(t)
+1525956360675:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956360688:y <- g(t)+s(t)+rnorm(length(t),0,0.1)
+1525956360702:plot(t,y)
+1525956360729:plot(t,g(t),ylim=c(0,7))
+1525956360772:par(new=T)
+1525956360782:plot(t,s(t),ylim=c(0,7))
+1525956606516:library(tidyverse)
+1525956606532:g <- function(t) t
+1525956606545:s <- function(t) sin(t)
+1525956606561:t <- ts(1:8,start=c(2000,1),freq=4)
+1525956606571:y <- g(t)+s(t)+rnorm(length(t),0,0.1)
+1525956606584:par(mfrow=c(1,2))
+1525956606591:plot(t,y)
+1525956606615:plot(t,g(t),ylim=c(-1.5,7))
+1525956606632:par(new=T)
+1525956606639:plot(t,s(t),ylim=c(-1.5,7))
+1525956606658:par(mfrow=c(1,1))
+1525957644374:library(tidyverse)
+1525957644388:g <- function(t) t
+1525957644399:s <- function(t) sin(t)
+1525957644412:t <- ts(1:8,start=c(2000,1),freq=4)
+1525957644424:y <- g(t)+s(t)+rnorm(length(t),0,0.1)
+1525957644444:par(mfrow=c(1,2))
+1525957644465:plot(t,y)
+1525957644507:plot(t,g(t),ylim=c(-1.5,7))
+1525957644531:par(new=T)
+1525957644542:plot(t,s(t),ylim=c(-1.5,7))
+1525957644570:par(mfrow=c(1,1))
+1525959127899:ar1 <- function(y0,t,c,phi,sigma){
+1525959127909:y <- rep(y0,t)
+1525959127921:for(i in 2:t){
+1525959127928:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959127938:}
+1525959127945:return(y)
+1525959127952:}
+1525959127964:t <- 100
+1525959127970:x <- seq(1,100)
+1525959127977:plot(x,ar1(12,t,2,0.8,1))
+1525959139932:ar1 <- function(y0,t,c,phi,sigma){
+1525959139944:y <- rep(y0,t)
+1525959139958:for(i in 2:t){
+1525959139973:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959139984:}
+1525959139996:return(y)
+1525959140008:}
+1525959140025:t <- 100
+1525959140036:x <- seq(1,100)
+1525959140045:plot(x,ar1(12,t,2,0.8,1),type='l')
+1525959152962:ar1 <- function(y0,t,c,phi,sigma){
+1525959152973:y <- rep(y0,t)
+1525959152986:for(i in 2:t){
+1525959152999:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959153010:}
+1525959153023:return(y)
+1525959153034:}
+1525959153053:t <- 100
+1525959153063:x <- seq(1,100)
+1525959153071:plot(x,ar1(12,t,2,0.8,1),type='l',ylab="")
+1525959165955:ar1 <- function(y0,t,c,phi,sigma){
+1525959165965:y <- rep(y0,t)
+1525959165977:for(i in 2:t){
+1525959165988:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959166002:}
+1525959166014:return(y)
+1525959166026:}
+1525959166046:t <- 100
+1525959166056:x <- seq(1,100)
+1525959166068:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="")
+1525959209484:ar1 <- function(y0,t,c,phi,sigma){
+1525959209497:y <- rep(y0,t)
+1525959209508:for(i in 2:t){
+1525959209519:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959209531:}
+1525959209542:return(y)
+1525959209548:}
+1525959209565:t <- 100
+1525959209573:x <- seq(1,100)
+1525959209579:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="")
+1525959216938:ar1 <- function(y0,t,c,phi,sigma){
+1525959216950:y <- rep(y0,t)
+1525959216965:for(i in 2:t){
+1525959216979:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959216992:}
+1525959217003:return(y)
+1525959217011:}
+1525959217030:t <- 100
+1525959217042:x <- seq(1,100)
+1525959217050:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="")
+1525959235901:ar1 <- function(y0,t,c,phi,sigma){
+1525959235916:y <- rep(y0,t)
+1525959235929:for(i in 2:t){
+1525959235943:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959235955:}
+1525959235967:return(y)
+1525959235978:}
+1525959235999:t <- 100
+1525959236011:x <- seq(1,100)
+1525959236023:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="")
+1525959924745:ar1 <- function(y0,t,c,phi,sigma){
+1525959924766:y <- rep(y0,t)
+1525959924778:for(i in 2:t){
+1525959924790:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959924802:}
+1525959924812:return(y)
+1525959924824:}
+1525959924843:t <- 100
+1525959924855:x <- seq(1,100)
+1525959924868:par(mfrow=c(2,3))
+1525959924880:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959925004:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959925033:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959925047:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959925074:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959925092:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959960932:ar1 <- function(y0,t,c,phi,sigma){
+1525959960952:y <- rep(y0,t)
+1525959960966:for(i in 2:t){
+1525959960981:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959960994:}
+1525959961009:return(y)
+1525959961022:}
+1525959961043:t <- 100
+1525959961054:x <- seq(1,100)
+1525959961065:par(mfrow=c(2,3))
+1525959961076:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959961133:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959961153:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959961183:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959961206:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959961226:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959979592:ar1 <- function(y0,t,c,phi,sigma){
+1525959979617:y <- rep(y0,t)
+1525959979634:for(i in 2:t){
+1525959979667:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525959979679:}
+1525959979691:return(y)
+1525959979704:}
+1525959979723:t <- 100
+1525959979738:x <- seq(1,100)
+1525959979751:par(mfrow=c(2,3))
+1525959979766:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959979850:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959979881:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959979901:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959979928:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525959979950:plot(x,ar1(12,t,2,0.8,1),type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525960584100:ar1
+1525960589892:ar1(y0=0, t=t, c=2, phi=0.8, simga=1)
+1525960703180:ar1 <- function(y0,t,c,phi,sigma){
+1525960703217:y <- rep(y0,t)
+1525960703233:for(i in 2:t){
+1525960703251:y[i] = c+phi*y[i-1]+rnorm(1,0,sigma^2)
+1525960703270:}
+1525960703278:return(y)
+1525960703293:}
+1525960703307:t <- 100
+1525960703316:x <- seq(1,100)
+1525960703324:par(mfrow=c(2,3))
+1525960703331:plot(x,ar1(y0=0, t=t, c=2, phi=0.8, sigma=1), type='l',xlab="",ylab="",main="c=2,phi=0.8,sigma=1")
+1525960703407:plot(x,ar1(y0=0, t, c=-2, phi=0.3, sigma=0.5), type='l',xlab="",ylab="",main="c=-2, phi=0.3, sigma=0.5")
+1525960703438:plot(x,ar1(y0=0, t, c=0, phi=-0.3, sigma=2), type='l',xlab="",ylab="",main="c=0, phi=-0.3, sigma=2")
+1525960703477:plot(x,ar1(y0=0, t, c=-2, phi=-0.8, sigma=1), type='l',xlab="",ylab="",main="c=-2, phi=-0.8, sigma=1")
+1525960703521:plot(x,ar1(y0=0, t, c=2, phi=1, sigma=1), type='l',xlab="",ylab="",main="c=2, phi=1, sigma=1")
+1525960703551:plot(x,ar1(y0=0, t, c=2, phi=1.1, sigma=1), type='l',xlab="",ylab="",main="c=2, phi=1.1, sigma=1")
+1525964940132:library(xts)
+1525964940147:library(forecast)
+1525964940158:library(urca)
+1525964940168:library(ggplot2)
+1525964940180:library(ggfortify)
+1525964954424:y1 <- ar1(0,200,0,0.7,1)
+1525964954442:ggtsdisplay(y1)
+1525964964324:y1
+1525964979083:y1 <- ar1(0,200,0,0.7,1)
+1525964979102:ggtsdisplay(ts(y1))
+1525964979239:y1 <- ar1(0,200,0,0.7,1)
+1525964979254:ggtsdisplay(ts(y1))
+1525964979320:y1 <- ar1(0,200,0,0.7,1)
+1525964979333:ggtsdisplay(ts(y1))
+1525964986781:y1 <- ar1(0,200,0,0.7,1)
+1525964986796:ggtsdisplay(ts(y1))
+1525965038909:ts(y1)
+1525965811891:plot(seq(1,2),seq(1,2))
+1525965820289:par(mfrow=c(1,1))
+1525965821463:plot(seq(1,2),seq(1,2))
+1525966100412:y1 <- ar1(0,200,0,0.7,1)
+1525966100429:par(mfrow=c(2,1))
+1525966100442:ggtsdisplay(ts(y1),main="AR(1)過程")
+1525966103210:ggtsdisplay(ts(y1),main="AR(1)過程")
+1525966106946:par(mfrow=c(1,1))
+1525966366593:y1 <- ar1(0,200,0,0.7,1)
+1525966366641:ggtsdisplay(ts(y1),main="AR(1)過程")
+1525966375772:y1 <- ar1(0,200,0,0.7,1)
+1525966375795:ggtsdisplay(ts(y1),main="AR(1)過程")
+1525973128022:str(Seatbelts)
+1525973250573:as_tibble(Seatbelts)
+1525973405214:tibble(date=as.Date(as.yearmon(time(Seatbelts))))
+1525973433309:tibble(date=as.Date(as.yearmon(time(Seatbelts)))) %>%
+1525973433316:bind_cols(as_tibble(Seatbelts))
+1525973447639:dat <- tibble(date=as.Date(as.yearmon(time(Seatbelts)))) %>%
+1525973447646:bind_cols(as_tibble(Seatbelts))
+1525973498091:head(Seatbelts) # Rに組み込みのSeatbeltsデータ
+1525975792318:petro_law <- train[,c("PetrolPrice","law")]
+1525975792331:model_sarimax <- Arima(
+1525975792345:y = train[,"front"],
+1525975792357:order = c(1,1,1),
+1525975792367:seasonal = list(order=c(1,0,0)),
+1525975792378:xreg = petro_law
+1525975792384:)
+1525975792550:model_sarimax
+1525976902964:ls
+1526398400688:library(gridExtra)
+1526398402438:library(urca)
+1526398402465:library(lmtest)
+1526398402506:library(prais)
+1526398402549:library(tidyverse)
+1526398402573:library(ggfortify)
+1526398402597:library(gridExtra)
+1526398476109:n_sample <- 400
+1526398476134:y_wn <- rnorm(n_sample)
+1526398476206:x_wn <- rnorm(n_sample)
+1526398476227:lm(y_wn~x_wn)
+1526398497118:n_sample <- 400
+1526398497138:y_wn <- rnorm(n_sample)
+1526398497159:x_wn <- rnorm(n_sample)
+1526398497181:model_ols_wn <- lm(y_wn~x_wn)
+1526398497261:summary(model_wn_wn)
+1526398503080:n_sample <- 400
+1526398503103:y_wn <- rnorm(n_sample)
+1526398503129:x_wn <- rnorm(n_sample)
+1526398503155:model_ols_wn <- lm(y_wn~x_wn)
+1526398503267:summary(model_ols_wn)
+1526399350787:x_rw <- cumsum(rnorm(n_sample))
+1526399389605:y_rw <- cumsum(rnorm(n_sample))
+1526399389621:x_rw <- cumsum(rnorm(n_sample))
+1526399389637:model_ols_rw <- lm(y_rw~x_rw)
+1526399389697:summary(model_ols_rw)
+1526399406825:y_rw <- cumsum(rnorm(n_sample))
+1526399406840:x_rw <- cumsum(rnorm(n_sample))
+1526399406862:model_ols_rw <- lm(y_rw~x_rw)
+1526399406918:summary(model_ols_rw)
+1526399408236:y_rw <- cumsum(rnorm(n_sample))
+1526399408253:x_rw <- cumsum(rnorm(n_sample))
+1526399408268:model_ols_rw <- lm(y_rw~x_rw)
+1526399408333:summary(model_ols_rw)
+1526399413687:y_rw <- cumsum(rnorm(n_sample))
+1526399413707:x_rw <- cumsum(rnorm(n_sample))
+1526399413730:model_ols_rw <- lm(y_rw~x_rw)
+1526399413780:summary(model_ols_rw)
+1526399415267:y_rw <- cumsum(rnorm(n_sample))
+1526399415283:x_rw <- cumsum(rnorm(n_sample))
+1526399415295:model_ols_rw <- lm(y_rw~x_rw)
+1526399415348:summary(model_ols_rw)
+1526399417879:y_rw <- cumsum(rnorm(n_sample))
+1526399417894:x_rw <- cumsum(rnorm(n_sample))
+1526399417909:model_ols_rw <- lm(y_rw~x_rw)
+1526399417975:summary(model_ols_rw)
+1526399695273:df_wn <- tibble(x_wn =x_wn,y_wn=y_wn)
+1526399695296:p_wn <- ggplot(df_wn,aes(x=x_wn,y=y_wn))+
+1526399695304:geom_point()+
+1526399695315:geom_smooth(mothod='lm',color=1)
+1526399695358:df_rw <- tibble(x_rw=x_rw,y_rw=y_rw)
+1526399695376:p_rw <- ggplot(df_rw,aes(x=x_rw,y=y_rw))+
+1526399695386:geom_point()+
+1526399695398:geom_smooth(mothod='lm',color=1)
+1526399695441:grid.arrange(p_)
+1526399705608:df_wn <- tibble(x_wn =x_wn,y_wn=y_wn)
+1526399705629:p_wn <- ggplot(df_wn,aes(x=x_wn,y=y_wn))+
+1526399705644:geom_point()+
+1526399705657:geom_smooth(mothod='lm',color=1)
+1526399705703:df_rw <- tibble(x_rw=x_rw,y_rw=y_rw)
+1526399705723:p_rw <- ggplot(df_rw,aes(x=x_rw,y=y_rw))+
+1526399705735:geom_point()+
+1526399705748:geom_smooth(mothod='lm',color=1)
+1526399705806:grid.arrange(p_wn,p_rw)
+1526399779287:df_wn <- tibble(x_wn =x_wn,y_wn=y_wn)
+1526399779310:p_wn <- ggplot(df_wn,aes(x=x_wn,y=y_wn))+
+1526399779327:geom_point()+
+1526399779338:geom_smooth(method='lm',color=1)
+1526399779373:df_rw <- tibble(x_rw=x_rw,y_rw=y_rw)
+1526399779391:p_rw <- ggplot(df_rw,aes(x=x_rw,y=y_rw))+
+1526399779404:geom_point()+
+1526399779419:geom_smooth(method='lm',color=1)
+1526399779456:grid.arrange(p_wn,p_rw)
+1526424097621:y_ar <- arima.sim(n_sample,modle=list(order=c(1,0,0),ar=c(0.8)))
+1526424112842:y_ar <- arima.sim(n_sample,
+1526424112861:model=list(order=c(1,0,0),ar=c(0.8)))
+1526424155221:y_ar <- arima.sim(n_sample,
+1526424155237:model=list(order=c(1,0,0),ar=c(0.8)))
+1526424155257:x_ar <- arima.sim(n_sample,
+1526424155274:model=list(order=c(1,0,0),ar=c(0.8)))
+1526424155297:summary(lm(y_ar~x_ar))
+1526424207200:?arima.sim
+1526424286445:y_ar <- arima.sim(n_sample,
+1526424286463:model=list(order=c(1,0,0),ar=c(0.8)))
+1526424286494:x_ar <- arima.sim(n_sample,
+1526424286514:model=list(order=c(1,0,0),ar=c(0.8)))
+1526424286528:summary(lm(y_ar~x_ar))
+1526424362185:df_ar <- tibble(x_ar =x_ar,y_wn=y_ar)
+1526424362212:p_ar <- ggplot(df_wn,aes(x=x_ar,y=y_ar))+
+1526424362231:geom_point()+
+1526424362249:geom_smooth(method='lm',color=1)
+1526424362301:p_ar
+1526425331377:resid_ols <- model_ols_rw$residuals
+1526425331400:dw <- sum(diff(resid_ols)^2) / sum(resid_ols^2)
+1526425335665:resid_ols <- model_ols_rw$residuals
+1526425335676:dw <- sum(diff(resid_ols)^2) / sum(resid_ols^2)
+1526425335689:dw
+1526425546761:lmtest::dwtest(model_ols_wn)
+1526425556184:lmtest::dwtest(model_ols_rw)
+1526425586355:?dwtest
+1526425613841:lmtest::dwtest(model_ols_rw)
+1526425649432:lmtest::dwtest(model_ols_rw,alternative = "two.sided")

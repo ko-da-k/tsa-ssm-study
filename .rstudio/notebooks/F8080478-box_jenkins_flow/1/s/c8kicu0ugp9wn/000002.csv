@@ -1,0 +1,12 @@
+"0","```r
+sarimax_petro_law <- auto.arima(
+  y=train[,\"front\"],
+  xreg = petro_law,
+  ic = \"aic\",
+  max.order = 7,
+  stepwise = F,
+  approximation = F,
+  parallel = T,
+  num.cores = 4
+)
+```"

@@ -1,0 +1,3 @@
+"0","```r
+autoplot(sarimax_f,predict.colour = 1)
+```"

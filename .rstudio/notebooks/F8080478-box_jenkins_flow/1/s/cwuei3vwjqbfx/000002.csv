@@ -1,0 +1,11 @@
+"0","```r
+checkresiduals(sarimax_petro_law)
+```"
+"1","
+	Ljung-Box test
+
+data:  Residuals from Regression with ARIMA(2,0,1)(0,1,1)[12] errors
+Q* = 20.99, df = 18, p-value = 0.2799
+
+Model df: 6.   Total lags used: 24
+"

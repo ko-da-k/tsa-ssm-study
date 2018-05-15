@@ -1,0 +1,10 @@
+"0","```r
+library(tseries)
+```"
+"1","
+    ‘tseries’ version: 0.10-44
+
+    ‘tseries’ is a package for time series analysis and computational finance.
+
+    See ‘library(help=\"tseries\")’ for details.
+"
