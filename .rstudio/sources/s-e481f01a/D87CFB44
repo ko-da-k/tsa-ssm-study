@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1526039898665.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D87CFB44",
+    "lastKnownWriteTime" : 1526041976,
+    "last_content_update" : 1526041980391,
+    "path" : "~/part2/part2.Rpres",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "351,6",
+        "scrollLine" : "336"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_presentation"
+}
